@@ -1,0 +1,36 @@
+"kglim",age:100}
+	    servlet.do?name=kglim&age=100
+	    		
+	    		
+	    complete 함수 (callback)
+	    
+	*/
+		$(function(){
+			$('#btn').click(function(){
+				//$('#display').load("Ex01_Server_Date.jsp"); //비동기 END 함수
+				
+				$('#display').load("Ex01_Server_Date.jsp",{"msg":$('#msg2').val()},
+						function(responseText , textStatus , xhr){
+						//자동 callback 함수
+						//응답 4번 
+						// responseText >> text , html
+						
+					    if(textStatus == "success"){
+					    	//응답 readyState == 4 번이고 stateCode 200 ~ 299 사이라면
+					    	console.log("responseText : " + responseText);
+					    }else{
+					    	//응답 readyState == 4  code=500 or code=404
+					    	console.log("response fail : " + xhr.status + "," + xhr.statusText);
+					    }
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+		<h3>비동기 처리</h3>
+		<input type="text" name="msg2" id="msg2">
+		<input type="button" id="btn" value="비동기전송">
+		<div id="display"></div>
+</body>
+</html>
